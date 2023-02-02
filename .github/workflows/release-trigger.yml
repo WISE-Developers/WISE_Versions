@@ -14,7 +14,7 @@ jobs:
     - uses: actions/github-script@v6
       name: Build WISE Builder
       with:
-        github-token: ${{ secrets.PSAAS_PAT }}
+        github-token: ${{ secrets.WISE_PAT }}
         script: |
           await github.rest.actions.createWorkflowDispatch({
             owner: 'WISE-Developers',
@@ -25,7 +25,7 @@ jobs:
     - uses: actions/github-script@v6
       name: Build WISE Manager
       with:
-        github-token: ${{ secrets.PSAAS_PAT }}
+        github-token: ${{ secrets.WISE_PAT }}
         script: |
           await github.rest.actions.createWorkflowDispatch({
             owner: 'WISE-Developers',
@@ -36,7 +36,7 @@ jobs:
     - uses: actions/github-script@v6
       name: Build WISE
       with:
-        github-token: ${{ secrets.PSAAS_PAT }}
+        github-token: ${{ secrets.WISE_PAT }}
         script: |
           await github.rest.actions.createWorkflowDispatch({
             owner: 'WISE-Developers',
@@ -47,7 +47,7 @@ jobs:
     - uses: actions/github-script@v6
       name: Build the WISE JS API
       with:
-        github-token: ${{ secrets.PSAAS_PAT }}
+        github-token: ${{ secrets.WISE_PAT }}
         script: |
           await github.rest.actions.createWorkflowDispatch({
             owner: 'WISE-Developers',
