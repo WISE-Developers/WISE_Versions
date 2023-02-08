@@ -55,3 +55,14 @@ jobs:
             workflow_id: 'archive.yml',
             ref: 'main'
           })
+    - uses: actions/github-script@v6
+      name: Build the WISE Java API
+      with:
+        github-token: ${{ secrets.WISE_PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'WISE-Developers',
+            repo: 'WISE_Java_API',
+            workflow_id: 'maven-publish.yml',
+            ref: 'main'
+          })
