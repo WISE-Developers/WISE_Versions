@@ -36,7 +36,7 @@ jobs:
 
     - uses: actions/github-script@v6
       with:
-        github-token: ${{ secrets.PSAAS_PAT }}
+        github-token: ${{ secrets.WISE_PAT }}
         script: |
           await github.rest.actions.createWorkflowDispatch({
             owner: 'WISE-Developers',
