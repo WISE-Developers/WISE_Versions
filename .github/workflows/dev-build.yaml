@@ -1,0 +1,75 @@
+# This workflow will trigger a dev build of WISE when a new commit is pushed to the developer branch or manually triggered.
+# It will also trigger a dev build of the WISE JS API, WISE Java API, WISE Builder, and WISE Manager.
+
+name: Dev Build
+
+on:
+
+  workflow_dispatch:
+  # push:
+  #   branches: [ developer ]
+  # pull_request:
+  #   branches: [ developer ]
+
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/github-script@v6
+      name: Build WISE Builder
+      with:
+        github-token: ${{ secrets.WISE_PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'WISE-Developers',
+            repo: 'WISE_Builder_Component',
+            workflow_id: 'maven-dev-build.yml',
+            ref: 'developer'
+          })
+    - uses: actions/github-script@v6
+      name: Build WISE Manager
+      with:
+        github-token: ${{ secrets.WISE_PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'WISE-Developers',
+            repo: 'WISE_Manager_Component',
+            workflow_id: 'maven-dev-build.yml',
+            ref: 'developer'
+          })
+    - uses: actions/github-script@v6
+      name: Build WISE
+      with:
+        github-token: ${{ secrets.WISE_PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'WISE-Developers',
+            repo: 'WISE_Application',
+            workflow_id: 'cmake-dev.yml',
+            ref: 'developer'
+          })
+    - uses: actions/github-script@v6
+      name: Build the WISE JS API
+      with:
+        github-token: ${{ secrets.WISE_PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'WISE-Developers',
+            repo: 'WISE_JS_API',
+            workflow_id: 'archive-dev.yml',
+            ref: 'developer'
+          })
+    - uses: actions/github-script@v6
+      name: Build the WISE Java API
+      with:
+        github-token: ${{ secrets.WISE_PAT }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'WISE-Developers',
+            repo: 'WISE_Java_API',
+            workflow_id: 'maven-dev-build.yml',
+            ref: 'developer'
+          })
